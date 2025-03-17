@@ -68,6 +68,7 @@ static const char* firefoxcmd[] = { "firefox", NULL };
 static const Key keys[] = {
 
 	{ MODKEY,                       XK_w,      spawn,          {.v = firefoxcmd } },
+  { MODKEY,                       XK_q,      quit,           {1} }, 
 
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -103,6 +104,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} }, 
 };
 
 /* button definitions */
