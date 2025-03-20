@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <X11/Xutil.h>
+#include <X11/XF86keysym.h>
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -70,13 +71,23 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "kitty", NULL };
+static const char *termcmd[]  = { "st", NULL };
 static const char* firefoxcmd[] = { "firefox", NULL };
+static const char *incvol[] = {"/usr/bin/amixer", "set", "Master", "5+", NULL};
+static const char *decvol[] = {"/usr/bin/amixer", "set", "Master", "5-", NULL};
+static const char *inc_brightness[] = {"/usr/bin/brightnessctl", "set", "5%+", NULL};
+static const char *dec_brightness[] = {"/usr/bin/brightnessctl", "set", "5%-", NULL};
 
 static const Key keys[] = {
 
 	{ MODKEY,                       XK_w,      spawn,          {.v = firefoxcmd } },
   { MODKEY,                       XK_q,      quit,           {1} }, 
+
+
+	{ 0,				 XF86XK_AudioLowerVolume,      spawn,          {.v = decvol} },	
+	{ 0,				 XF86XK_AudioRaiseVolume,      spawn,          {.v = incvol} },
+	{ 0,				 XF86XK_MonBrightnessUp,       spawn,          {.v = inc_brightness} },	
+	{ 0,				 XF86XK_MonBrightnessDown,     spawn,          {.v = dec_brightness} },
 
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
